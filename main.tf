@@ -5,12 +5,12 @@ terraform {
       version = "~> 3.0"
     }
   }
-  /*backend "s3" {
+  backend "s3" {
     bucket = "porapuka"
     key = "terraform-state-file/terraform.tfstate"
     region = "us-east-1"
     dynamodb_table = "porapuka"
-  }*/
+  }
 }
 
 # Configure the AWS Provider
@@ -35,7 +35,7 @@ resource "aws_vpc" "myapp-vp" {
   }
 }
 
-/*#creating subnets
+#creating subnets
 resource "aws_subnet" "myapp-subnet-1" {
   vpc_id            = aws_vpc.myapp-vpc.id
   cidr_block        = var.subnet_cidr_block
@@ -43,20 +43,20 @@ resource "aws_subnet" "myapp-subnet-1" {
   tags = {
     "Name" = "${var.env_prefix}-subnet-1"
   }
-}*/
+}
 
-/*#creating internet gateway
+#creating internet gateway
 
 resource "aws_internet_gateway" "myapp-igw" {
   vpc_id = aws_vpc.myapp-vpc.id
   tags = {
     "Name" = "${var.env_prefix}-igw"
   }
-}*/
+}
 
 # create route table
 
-/*resource "aws_route_table" "myapp-rt" {
+resource "aws_route_table" "myapp-rt" {
   vpc_id = aws_vpc.myapp-vpc.id
   route {
     cidr_block = "0.0.0.0/0"
@@ -65,15 +65,15 @@ resource "aws_internet_gateway" "myapp-igw" {
   tags = {
     Name = "${var.env_prefix}-rt"
   }
-}*/
+}
 
-/*# route_table_association
+# route_table_association
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.myapp-subnet-1.id
   route_table_id = aws_route_table.myapp-rt.id
-}*/
+}
 
-/*#default route table (subnets assigned automatically)
+#default route table (subnets assigned automatically)
 resource "aws_default_route_table" "default-rt" {
   default_route_table_id = aws_vpc.myapp-vpc.default_route_table_id
   route {
@@ -83,9 +83,9 @@ resource "aws_default_route_table" "default-rt" {
   tags = {
     Name = "${var.env_prefix}-default-rt"
   }
-}*/
+}
 
-/*#security group
+#security group
 resource "aws_security_group" "myapp-sg" {
   name   = "myapp-sg"
   vpc_id = aws_vpc.myapp-vpc.id
@@ -136,9 +136,9 @@ data "aws_ami" "latest-amazon-linux-image" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-}*/
+}
 
-/*#creating instance
+#creating instance
 resource "aws_instance" "myapp-server" {
   ami                         = data.aws_ami.latest-amazon-linux-image.id
   instance_type               = var.instance_type
@@ -150,5 +150,5 @@ resource "aws_instance" "myapp-server" {
   tags = {
     "Name" = "${var.env_prefix}-myapp-server"
   }
-}*/
+}
 
