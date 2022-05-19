@@ -1,0 +1,6 @@
+cidr_block        = "192.168.0.0/16"
+env_prefix        = "dev"
+subnet_cidr_block = "192.168.1.0/24"
+az                = "us-east-1a"
+my-ip             = "192.168.0.0/24"
+instance_type     = "t2.micro"
